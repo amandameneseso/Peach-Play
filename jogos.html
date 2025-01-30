@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Site de Jogos</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap');
+
+        html {
+            cursor: url('imagens/icons8-espada-32.png'), auto;
+        }
+
+        body {
+            background-color: #000000;
+            /* background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%23957685' fill-opacity='0.4' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E"); */
+            /* background-attachment: fixed; */
+            font-family: "Pixelify Sans", serif;
+
+        }
+        .navbar {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 60px;
+        }
+        .card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: scale(1.03);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        .container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .footer {
+            margin-top: 30px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">Peach Play</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Jogos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Sobre</a>
+                    </li>
+                </ul>
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Procurar jogos..." aria-label="Search">
+                    <button class="btn btn-light" type="submit">Procurar</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="container mt-4 px-5">
+        <div class="row">
+
+            <div class="col-md-3">
+                <div id="jogos-coluna-1">
+                    <div class="card mb-3">
+                        <img src="imagens/tick-tack-toe.webp" class="card-img-top" alt="...">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Jogo da velha</h5>
+                            <p class="card-text">Jogo de estratégia clássico.</p>
+                            <a href="#" class="btn btn-light">Jogar</a>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <img src="imagens/velocidade-de-digitação.jpg" class="card-img-top" alt="...">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Velocidade de digitação</h5>
+                            <p class="card-text">Teste sua rapidez no teclado.</p>
+                            <a href="#" class="btn btn-light">Jogar</a>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <img src="imagens/jogo-da-cobrinha.webp" class="card-img-top" alt="...">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Jogo da cobrinha</h5>
+                            <p class="card-text">Clássico jogo de arcade.</p>
+                            <a href="#" class="btn btn-light">Jogar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div id="jogos-coluna-2">
+                    <div class="card mb-3">
+                        <img src="imagens/jogo-da-memoria.jpg" class="card-img-top" alt="...">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Jogo da memória</h5>
+                            <p class="card-text">Teste sua memória e concentração.</p>
+                            <a href="#" class="btn btn-light">Jogar</a>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <img src="imagens/quiz.jpg" class="card-img-top" alt="...">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Quiz</h5>
+                            <p class="card-text">Desafie seus conhecimentos gerais.</p>
+                            <a href="#" class="btn btn-light">Jogar</a>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <img src="imagens/candy-crush.jpg" class="card-img-top" alt="...">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Candy Crush</h5>
+                            <p class="card-text">Combine doces e faça pontos!</p>
+                            <a href="#" class="btn btn-light">Jogar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div id="jogos-coluna-3">
+                    <div class="card mb-3">
+                        <img src="imagens/jogo-da-forca.jpg" class="card-img-top" alt="...">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Jogo da forca</h5>
+                            <p class="card-text">Acerte as palavras antes de perder!</p>
+                            <a href="#" class="btn btn-light">Jogar</a>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <img src="imagens/guess-word.webp" class="card-img-top" alt="...">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Adivinhe a palavra</h5>
+                            <p class="card-text">Teste seu vocabulário e raciocínio.</p>
+                            <a href="#" class="btn btn-light">Jogar</a>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <img src="imagens/jogo-de-corrida.jpg" class="card-img-top" alt="...">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Jogo de corrida</h5>
+                            <p class="card-text">Compita para chegar em primeiro!</p>
+                            <a href="#" class="btn btn-light">Jogar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div id="jogos-coluna-4">
+                    <div class="card mb-3">
+                        <img src="imagens/jogo-da-forca.jpg" class="card-img-top" alt="...">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Jogo da forca</h5>
+                            <p class="card-text">Acerte as palavras antes de perder!</p>
+                            <a href="#" class="btn btn-light">Jogar</a>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <img src="imagens/guess-word.webp" class="card-img-top" alt="...">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Adivinhe a palavra</h5>
+                            <p class="card-text">Teste seu vocabulário e raciocínio.</p>
+                            <a href="#" class="btn btn-light">Jogar</a>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <img src="imagens/jogo-de-corrida.jpg" class="card-img-top" alt="...">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Jogo de corrida</h5>
+                            <p class="card-text">Compita para chegar em primeiro!</p>
+                            <a href="#" class="btn btn-light">Jogar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="footer">
+        <div class="container-fluid text-white py-3 px-sm-3 px-md-5 bg-dark">
+            <h1 class="m-0 text-center" style="font-size: 15px;">Made with &lt;3 by <a href="#">nome</a></h1>
+        </div>
+    </section>
+
+</body>
+</html>

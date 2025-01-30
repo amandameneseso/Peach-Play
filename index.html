@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        @import url(https://fonts.googleapis.com/css?family=Press+Start+2P);
+
+        :root {
+            --cursor-defalt: url('imagens/icons8-cursor-32.png'), pointer;
+            --cursor-pointer: url('imagens/icons8-espada-32.png'), auto;
+        }
+
+        html {
+            cursor: var(--cursor-defalt);
+        }
+
+        body {
+        background:black;
+        }
+
+        .container {
+        width:460px;
+        height:400px;
+        margin:50px auto;
+        }
+
+        .topText {
+        height:50px;
+        width:100%;
+        margin-top:250px;
+        font-size:20px;
+        color:white;
+        text-align:center;
+        font-family: 'Press Start 2P', cursive;
+        }
+
+        .fire {
+        margin-top:15px;
+        }
+
+        .fire:before {
+        content:"";
+        position:absolute;
+        background:url('http://files.gamebanana.com/img/ico/sprays/zelda_fire_render.gif');
+        height:50px;
+        width:50px;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        margin-left:100px;
+        margin-top: 300px;
+        }
+
+        .fire:after {
+        content:"";
+        position:absolute;
+        background:url('http://files.gamebanana.com/img/ico/sprays/zelda_fire_render.gif');
+        height:50px;
+        width:50px;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        margin-left:320px;
+        margin-top: 300px;
+        }
+
+        .sword {
+            background: url('imagens/vecteezy-sword.png') no-repeat center;
+            width: 180px; /* Aumentado */
+            height: 220px; /* Aumentado */
+            background-size: contain; /* Garante que a imagem se ajuste ao tamanho do elemento */
+            margin-left: 150px; /* Ajustado para manter o alinhamento */
+            margin-top: 160px; /* Ajustado para melhor posição */
+            cursor: var(--cursor-pointer);
+        
+        }
+
+        body {
+            transition: opacity 0.5s ease;
+        }
+
+        body.fade-out {
+            opacity: 0;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="topText"></div>
+        <div class="fire"></div><!--end fire-->
+        <div class="sword"></div><!--end sword-->
+      </div><!--end container-->
+
+      <script>
+        // not complete, still need to add sound.
+        $.fn.teletype = function(opts){
+            var $this = this,
+                defaults = {
+                    animDelay: 50
+                },
+                settings = $.extend(defaults, opts);
+            
+            $.each(settings.text.split(''), function(i, letter){
+                setTimeout(function(){
+                    $this.html($this.html() + letter);
+                }, settings.animDelay * i);
+            });
+        };
+
+        $(function(){
+            $('.topText').teletype({
+                animDelay: 100,
+                text: "IT'S DANGEROUS TO GO ALONE! TAKE THIS."
+            });
+        });
+
+        $('.sword').on('click', function(){
+            $('body').addClass('fade-out'); // Aplica a transição de fade-out
+
+            setTimeout(() => {
+                window.location.href = 'jogos.html'; // Redireciona após o fade
+            }, 500); // Tempo correspondente à animação de fade-out
+        });
+      </script>
+        
+</body>
+</html>
