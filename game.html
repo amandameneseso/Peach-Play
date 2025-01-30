@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+</head>
+<style>
+    /* @use postcss-nested; */
+    @import url('https://fonts.googleapis.com/css?family=Lato|Press+Start+2P');
+    @import url('http://db.onlinewebfonts.com/c/487390d5558cff7a17ce35d7d92a0540?family=Pretendo');
+
+    /* Layout */
+    body {
+    background-color: #000;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;  
+    height: 98vh;
+    }
+
+    h1 {
+    font-family: 'Press Start 2P', sans-serif;
+    margin-bottom: 2em;
+    text-align: center;
+    max-width: 800px;
+    line-height: 130%;
+    color: #8bac0f;
+    text-shadow: 1px 1px 0 #fff;
+    margin: 0;  
+    }
+
+    h1 + p {
+    font-family: Lato, sans-serif;
+    font-size: 16px;
+    color: #fff;
+    margin-bottom: 2em;
+    }
+    p a { color: #c78dff; }
+
+    .wrapper {
+    --gameboy-width: 375px;
+    --gameboy-height: 625px;
+
+    width: var(--gameboy-width);
+    height: var(--gameboy-height);
+    position: relative;
+    }
+
+    /* GameBoy console body */
+    .gameboy {
+    background: #d3ccd3 linear-gradient(#d3ccd3 95%, #999 98%, #777 99%);
+    overflow: hidden;
+    border-radius: 12px 12px 75px 12px;
+    box-shadow: 0 0 10px rgba(0,0,0, 0.5), 0 0 15px rgba(0,0,0, 0.75) inset;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    
+    position: relative;
+    }
+
+    .power {
+    width: 30px;
+    height: 15px;
+    border-radius: 50%;
+    background: linear-gradient(to right, #eee 10%, #d3ccd3 30% 70%, #eee 90%);
+    box-shadow: 0 0 4px rgba(0,0,0, 0.5) inset;
+    position: absolute;
+    top: -7px;
+    left: 50px;
+    cursor: pointer;
+    
+    &.on { left: 75px; }
+    }
+
+    .gameboy > .top {
+    display: flex;
+    padding-bottom: 5px;
+    margin-bottom: 5px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    
+    & .corner { 
+        width: 25px;
+        height: 20px;
+    }
+    & .corner.left { margin-right: 5px; }
+    & .corner.right { margin-left: 5px; }
+    & .top { 
+        width: 100%;
+    }
+    
+    & > div {
+        border-radius: 0 0 2px 2px;
+        border: 1px solid rgba(0,0,0, 0.1);
+        box-shadow: 1px 1px 3px rgba(0,0,0, 0.25);
+        
+        & span {
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+        box-shadow: 2px 2px 2px rgba(0,0,0, 0.5) inset;
+        text-shadow: 2px 1px 2px rgba(0,0,0, 1);     
+        color: #eee;
+        border-radius: 15px;
+        margin: 0 6px;
+        padding: 2px 5px;
+        opacity: 0.25;
+        }
+    }
+    }
+
+    /* GameBoy complete screen (gray + green) */
+    .screen {
+    background: #767189;
+    width: calc(var(--gameboy-height) / 2);
+    box-shadow: 0 0 2px #514c65;
+    border-radius: 10px 10px 35px 10px;  
+    height: 250px;
+    margin: 0.1em auto;
+    
+    & span {
+        font-family: Arial, sans-serif;
+        font-size: 10px;
+        color: #fff;    
+    }
+    
+    & .top {
+        margin: 0 15px;
+        height: 30px;
+        background: linear-gradient(
+        transparent 10px, #7d1a4a 10px 12px, transparent 12px 16px, 
+        #35224e 16px 18px, transparent 18px);
+        position: relative;
+        
+        & span {
+        padding: 0 8px;
+        background: #767189;
+        
+        position: absolute;
+        right: 30px;
+        top: 8px;
+        }
+    }
+    
+    .bottom {
+        display: flex;
+
+        & .led {
+        width: 10px;
+        height: 10px;
+        background: #4a4748;
+        border-radius: 50%;
+        margin: 6px;
+
+        &.on {
+            background: #d81e07;    
+            box-shadow: 0 0 5px #d81e07;      
+        }
+        }
+
+        & .battery {
+        padding: 0 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        }
+    }  
+    }
+
+    /* Game Screen (only green screen) */
+    .gamescreen {
+    background: #9ca04c;
+    width: 200px;
+    height: 190px;
+    box-shadow: 5px 5px 10px rgba(0,0,0, 0.5) inset, -2px -2px 10px rgba(0,0,0, 0.25) inset;
+    
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    overflow: hidden;
+    
+    & span {    
+        display: none;
+        font-family: 'Press Start 2P';
+        font-weight: bold;
+        font-size: 18px;
+        letter-spacing: -1px;
+        color: #0f380f;
+        
+        & sup {
+        font-weight: normal;
+        font-size: 12px;
+        }    
+    }
+
+    &.startup span {
+        display: block;
+        animation: startup 2s linear forwards;    
+        transform: translate(0, -25px);
+    }  
+    }
+
+    @keyframes startup {
+    0% { transform: translate(0, -25px); }
+    100% { transform: translate(0, 80px); }
+    }
+
+    /* Brand Nintendo GameBoy text */
+    .brand {
+    margin: 5px 30px;
+    
+    & span {
+        font-family: Pretendo, sans-serif;
+        font-size: 15px;
+        color: #302058;
+    }
+    
+    & span:nth-child(2) {
+        font-family: Lato, sans-serif;
+        font-weight: bold;
+        font-style: italic;
+        font-size: 22px;
+    }
+    }
+
+    /* Main controls: Cross and A/B buttons */
+    .controls {
+    display: flex;
+    justify-content: space-between;
+    }
+
+    .cross {
+    background: linear-gradient(to bottom, #c4bfc6 -10%, #e2e0eb 130%);
+    border-radius: 50%;
+    padding: 10px;
+    width: 100px;
+    height: 100px;
+    margin: 30px;
+    display: grid;
+    grid-template-areas: ". up ." "left center right" ". down .";
+    
+    & .cursor { 
+        background: #040308;
+        border: 3px solid #040308;
+        box-shadow: 2px 4px 3px rgba(0,0,0, 0.6);
+        display: flex;
+    }
+    
+    & .cursor.up,
+    & .cursor.left,
+    & .cursor.right {
+        border-top-color: #c5d8e1;
+    }
+    
+    & .cursor .circle {
+        border: 1px solid #111;
+        border-left: 0;
+        border-bottom: 0;
+        border-radius: 50%;
+        width: 100%;
+        height: 100%;
+        background: conic-gradient(transparent 0 30%, rgba(255,255,255, 0.5) 40% 60%, transparent 70%);
+    }
+    
+    & .cursor.up { grid-area: up; }
+    & .cursor.left { grid-area: left; }
+    & .cursor.center { grid-area: center; }
+    & .cursor.right { grid-area: right; }
+    & .cursor.down { grid-area: down; }
+    
+    & .cursor:active { 
+        box-shadow: none;
+        border-color: #111;
+    }
+    & .cursor.center:active { border-color: #040308; }
+    }
+
+    .buttons {
+    background: linear-gradient(#b7acb1 -10%, #f1f3f2 130%);
+    border-radius: 40px;
+    padding: 5px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    margin: 50px 30px 0 0;
+    transform: rotate(-30deg);
+
+    & .button {
+        width: 50px;
+        height: 50px;
+        box-shadow: -2px 3px 5px rgba(0,0,0, 1), -3px 4px 3px rgba(255, 255, 255, 0.25) inset;
+        margin: 0 6px;
+        border-radius: 50%;
+        background: #6f001a;
+        
+        &:active {
+        box-shadow: -3px 4px 3px rgba(0,0,0, 0.25) inset, 2px -2px 3px rgba(0,0,0, 0.25) inset;
+        }
+    }
+    & .button::after {
+        font-family: Pretendo, sans-serif;
+        font-size: 16px;
+        color: #302058;
+        content: attr(data-button);
+        position: relative;
+        right: -15px;
+        bottom: -65px;
+    }
+    }
+
+    /* Secondary controls: Select & Start */
+    .gamecontrols {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 50px;
+    
+    & .gap {
+        background: linear-gradient(#b7acb1 -10%, #f1f3f2 130%);
+        transform: rotate(-28deg);
+        margin: 0 5px;
+        border-radius: 15px;
+    }
+        
+    & .button {
+        background: #9e9baf;
+        border-radius: 10px;
+        box-shadow: 
+        -2px -2px 5px rgba(0,0,0, 0.4) inset, 
+        2px 2px 5px rgba(255,255,255, 0.7) inset, 
+        2px 2px 6px rgba(0,0,0, 0.8);
+        width: 50px;
+        height: 12px;
+        margin: 6px 8px;
+        
+        &:active {
+        box-shadow: 
+            -2px -2px 5px rgba(0,0,0, 0.4) inset, 
+            2px 2px 5px rgba(0,0,0, 0.7) inset;
+        }    
+    }
+    
+    & .button::after {
+        font-family: Pretendo, sans-serif;
+        font-size: 12px;
+        color: #302058;
+        content: attr(data-button);
+        position: relative;
+        right: 0;
+        bottom: -20px;
+    }  
+    }
+
+    /* Gameboy bottom body part */
+    .gameboy > .bottom {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: relative;
+        left: -20px;
+    }
+
+    .speaker {
+        display: flex;
+        width: 120px;
+        justify-content: space-around;
+        position: absolute;
+        right: 15px;
+        bottom: 35px;
+        transform: rotate(-30deg);
+    
+    &::after {
+        content: "";
+        width: 200px;
+        height: 60px;
+        position: absolute;
+        background: rgba(0,0,0, 0.1);
+        top: 50px;
+    }
+    
+    & .band {
+        width: 8px;
+        height: 60px;
+        border-radius: 8px;
+        box-shadow: 3px 6px 1px rgba(0,0,0, 0.6) inset;
+        background: rgba(0,0,0, 0.35);
+        }
+    }
+
+    .phones {
+        font-family: Arial, sans-serif;
+        font-size: 10px;
+        opacity: 0.5;
+        text-align: center;
+        border: 1px solid #aaa;
+        border-radius: 40px;
+        padding: 2px 6px;
+        box-shadow: 0 0 5px rgba(0,0,0, 0.5) inset;
+        margin-bottom: 10px;
+    }
+
+    .owl-nav {
+        position: relative;
+        top: 50%;
+        width: 100%;
+        transform: translateY(-50%);
+        display: flex !important;
+        justify-content: space-between;
+    }
+
+    .owl-nav button {
+        background: rgb(255, 255, 255) !important;
+        color: rgb(233, 0, 0) !important;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        top: -10px;
+        font-size: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: none;
+        outline: none;
+        position: relative;
+    }
+
+    .hidden {
+    display: none;
+}
+
+</style>
+<body>
+
+<div class="wrapper">
+  <div class="power"></div>
+  <div class="gameboy">
+    <div class="top">
+      <div class="corner left"></div>
+      <div class="top">
+        <span>◁ OFF·ON ▷</span>
+      </div>
+      <div class="corner right"></div>
+    </div>
+    <div class="screen">
+      <div class="top">
+        <span>DOT MATRIX WITH STEREO SOUND</span>
+      </div>
+      <div class="bottom">
+        <div class="battery">
+          <div class="led"></div>
+          <span>BATTERY</span>
+        </div>
+        <div class="gamescreen">
+            <span>Nintendo<sup>®</sup></span>
+            <div class="owl-carousel game-carousel hidden">
+                <div class="game-item">
+                    <div class="game-img">
+                        <img class="img-fluid rounded-circle" src="imagens/tick-tack-toe.webp" alt="" style="width: 200px; height: 190px;">
+                    </div>
+                </div>
+                <div class="game-item">
+                    <div class="game-img">
+                        <img class="img-fluid rounded-circle" src="imagens/jogo-da-cobrinha.webp" alt="" style="width: 200px; height: 190px;">
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+    <div class="brand">
+      <span>Nintendo</span>
+      <span>GAME BOY</span>
+      <sub>™</sub>
+    </div>
+
+    <div class="controls">
+      <div class="cross">
+        <div class="cursor up"></div>
+        <div class="cursor left"></div>
+        <div class="cursor center">
+          <div class="circle"></div>
+        </div>
+        <div class="cursor right"></div>
+        <div class="cursor down"></div>
+      </div>
+      <div class="buttons">
+        <div class="button B" data-button="B"></div>
+        <div class="button A" data-button="A"></div>
+      </div>
+    </div>
+
+    <div class="speaker">
+      <div class="band"></div>
+      <div class="band"></div>
+      <div class="band"></div>
+      <div class="band"></div>
+      <div class="band"></div>
+      <div class="band"></div>
+    </div>
+
+    <div class="bottom">
+      <div class="gamecontrols">
+        <div class="gap"><div class="button select" data-button="SELECT"></div></div>
+        <div class="gap"><div class="button start"  data-button="START"></div></div>
+      </div>    
+      <div class="phones">🎧PHONES</div>
+    </div>
+
+</div>
+
+    <!-- jQuery e Owl Carousel JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+
+    <script>
+        const startup = new Audio('https://manzdev.github.io/cursos-assets/html5/nintendo/startup.mp3');
+        let timer;
+    
+        const dom = {
+            power: document.querySelector('.power'),
+            led: document.querySelector('.led'),
+            gamescreen: document.querySelector('.gamescreen'),
+        }
+    
+        dom.power.addEventListener('click', function() {
+            this.classList.toggle('on');
+            dom.led.classList.toggle('on');
+            dom.gamescreen.classList.toggle('startup');
+            
+            if (this.classList.contains('on'))
+                timer = setTimeout(() => startup.play(), 2100);
+        });
+    
+        // Espera o fim da animação da tela para exibir o carrossel, com 1 segundo de espera adicional
+        document.querySelector('.gamescreen').addEventListener('animationend', () => {
+            setTimeout(() => {
+                $('.game-carousel').removeClass('hidden'); // Exibe o carrossel
+                // Inicia o Owl Carousel após a espera
+                $(".game-carousel").owlCarousel({
+                    loop: true,  // Faz o carrossel rodar em loop infinito
+                    nav: true,  // Ativa botões de navegação
+                    dots: false, // Mostra os indicadores de página
+                    autoplay: false, // Desativa rolagem automática
+                    navText: ["<i class='fa-solid fa-arrow-left'></i>", "<i class='fa-solid fa-arrow-right'></i>"],
+                    responsive: {
+                        0: { items: 1, nav: true },  // 1 item visível em telas pequenas
+                        600: { items: 1, nav: true },
+                        1000: { items: 1, nav: true }
+                    }
+                });
+            }, 2100);  // Aguarda 2.1 segundos após a animação para exibir o carrossel
+        });
+    
+        // Owl Carousel (Carrossel inicialmente oculto)
+        $(document).ready(function() {
+            $(".game-carousel").addClass('hidden');  // Esconde o carrossel inicialmente
+        });
+    </script>
+
+</body>
+</html>
